@@ -29,7 +29,7 @@ function ba_info_add_pages() {
 function ba_info_footer() {
 	// Read in existing option value from database
 	$opt_name = 'ba-info';
-	$opt_val = get_option( $opt_name );
+	$opt_val = unserialize( get_option( $opt_name ) );
 	$html = wpautop($opt_val['ba_info_footer']);
 
 	return $html;
@@ -37,7 +37,7 @@ function ba_info_footer() {
 function ba_info_header() {
 	// Read in existing option value from database
 	$opt_name = 'ba-info';
-	$opt_val = get_option( $opt_name ) ;
+	$opt_val = unserialize( get_option( $opt_name ) );
 	$html = str_replace(array('<p>', '</p>'), '', wpautop(stripslashes($opt_val['ba_info_header'])));
 
 	return $html;
@@ -58,7 +58,7 @@ function ba_info_toplevel_page() {
 	$data_field_name = 'ba-info';
 
 	// Read in existing option value from database
-	$opt_val = get_option( $opt_name );
+	$opt_val = unserialize( get_option( $opt_name ) );
 
 	// See if the user has posted us some information
 	// If they did, this hidden field will be set to 'Y'
@@ -70,7 +70,7 @@ function ba_info_toplevel_page() {
 		if(!isset($opt_val['ba_info_header'])) $opt_val['ba_info_header']=null;
 		 
 		// Save the posted value in the database
-		update_option( $opt_name, stripslashes($opt_val));
+		update_option( $opt_name, serialize($opt_val));
 		 
 		// Put an settings updated message on the screen
 		?><div class="updated"><p><strong><?php _e('Ustawienia zapisano.', 'menu-test' ); ?></strong></p></div><?php
