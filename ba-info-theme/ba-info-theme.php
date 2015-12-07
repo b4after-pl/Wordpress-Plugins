@@ -17,11 +17,6 @@ function ba_info_add_pages() {
 	// Add a new top-level menu (ill-advised):
 	add_menu_page(__('Dodatkowe treści','menu-ba-info'), __('Dodatkowe treści','menu-ba-info'), 'manage_options', 'ba-info', 'ba_info_toplevel_page' );
 
-	// Add a submenu to the custom top-level menu:
-	//add_submenu_page('mt-top-level-handle', __('Test Sublevel','menu-test'), __('Test Sublevel','menu-test'), 'manage_options', 'sub-page', 'mt_sublevel_page');
-
-	// Add a second submenu to the custom top-level menu:
-	//add_submenu_page('mt-top-level-handle', __('Test Sublevel 2','menu-test'), __('Test Sublevel 2','menu-test'), 'manage_options', 'sub-page2', 'mt_sublevel_page2');
 }
 
 // display attributes function
