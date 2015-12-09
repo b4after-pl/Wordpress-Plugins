@@ -15,7 +15,7 @@ add_action('admin_menu', 'ba_info_add_pages');
 function ba_info_add_pages() {
 
 	// Add a new top-level menu (ill-advised):
-	add_menu_page(__('Dodatkowe treści','menu-ba-info'), __('Dodatkowe treści','menu-ba-info'), 'manage_options', 'ba-info', 'ba_info_toplevel_page' );
+	add_menu_page(__('Dodatkowe treści','menu-ba-info'), __('Dodatkowe treści','menu-ba-info'), 'publish_posts', 'ba-info', 'ba_info_toplevel_page' );
 
 }
 
@@ -42,7 +42,7 @@ function ba_info_toplevel_page() {
 	echo "<h2>" . __( 'Dodatkowe treści', 'menu-bainfo' ) . "</h2>";
 
 	//must check that the user has the required capability
-	if (!current_user_can('manage_options'))
+	if (!current_user_can('publish_posts'))
 	{
 		wp_die( __('Nie masz uprawnień do tego elementu.') );
 	}
