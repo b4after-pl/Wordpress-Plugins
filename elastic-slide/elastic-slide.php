@@ -13,7 +13,7 @@
  * @package           Elastic Slide
  *
  * @wordpress-plugin
- * Plugin Name: elastic-slide
+ * Plugin Name: Elastic Slide
  * Plugin URI: http://www.b4after.pl/wordpress/elastic-slide
  * Description: Elegant and light popup slider build with HTML5 and CSS3
  * Version: 1.0.0
