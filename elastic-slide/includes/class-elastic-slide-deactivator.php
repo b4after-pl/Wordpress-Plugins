@@ -20,7 +20,7 @@
  * @subpackage Elastic_Slide/includes
  * @author     Your Name <email@example.com>
  */
-class Plugin_Name_Deactivator {
+class Elastic_Slide_Deactivator {
 
 	/**
 	 * Short Description. (use period)

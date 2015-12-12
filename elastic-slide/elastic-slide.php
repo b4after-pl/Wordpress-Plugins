@@ -34,22 +34,22 @@ if ( ! defined( 'WPINC' ) ) {
  * The code that runs during plugin activation.
  * This action is documented in includes/class-elastic-slide-activator.php
  */
-function activate_plugin_name() {
+function activate_Elastic_Slide() {
 	require_once plugin_dir_path( __FILE__ ) . 'includes/class-elastic-slide-activator.php';
-	Plugin_Name_Activator::activate();
+	Elastic_Slide_Activator::activate();
 }
 
 /**
  * The code that runs during plugin deactivation.
  * This action is documented in includes/class-elastic-slide-deactivator.php
  */
-function deactivate_plugin_name() {
+function deactivate_Elastic_Slide() {
 	require_once plugin_dir_path( __FILE__ ) . 'includes/class-elastic-slide-deactivator.php';
-	Plugin_Name_Deactivator::deactivate();
+	Elastic_Slide_Deactivator::deactivate();
 }
 
-register_activation_hook( __FILE__, 'activate_plugin_name' );
-register_deactivation_hook( __FILE__, 'deactivate_plugin_name' );
+register_activation_hook( __FILE__, 'activate_Elastic_Slide' );
+register_deactivation_hook( __FILE__, 'deactivate_Elastic_Slide' );
 
 /**
  * The core plugin class that is used to define internationalization,
@@ -66,10 +66,10 @@ require plugin_dir_path( __FILE__ ) . 'includes/class-elastic-slide.php';
  *
  * @since    1.0.0
  */
-function run_plugin_name() {
+function run_Elastic_Slide() {
 
 	$plugin = new Elastic_Slide();
 	$plugin->run();
 
 }
-run_plugin_name();
+run_Elastic_Slide();

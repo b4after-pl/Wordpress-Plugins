@@ -21,7 +21,7 @@
  * @subpackage Elastic_Slide/includes
  * @author     Your Name <email@example.com>
  */
-class Plugin_Name_Loader {
+class Elastic_Slide_Loader {
 
 	/**
 	 * The array of actions registered with WordPress.

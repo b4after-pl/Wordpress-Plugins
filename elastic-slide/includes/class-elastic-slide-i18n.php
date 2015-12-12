@@ -24,7 +24,7 @@
  * @subpackage Elastic_Slide/includes
  * @author     Your Name <email@example.com>
  */
-class Plugin_Name_i18n {
+class Elastic_Slide_i18n {
 
 
 	/**
