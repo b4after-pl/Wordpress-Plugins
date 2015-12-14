@@ -105,7 +105,7 @@ class Elastic_Slide_Admin {
             __('Elastic Slider'),
             __('Elastic Slider Settings'),
             'manage_options',
-            'elastic-slider-plugin',
+            'elastic-slider-plugin-page',
             array('Elastic_Slide_Admin', 'elastic_slider_options_page') // nazwa klasy oraz nazwa funkcji aby wp wykonywał funkcję wewnątrz klasy
         );
         
@@ -113,51 +113,51 @@ class Elastic_Slide_Admin {
     
     public function elastic_slider_settings_setup()
     {
-        /* $settings_section = 'elastic-slider-options';
-        $var_activate = 'elastic-slider-activate';
+        $settings_section = 'elastic-slider-options';
+        $var_activate = 'elastic-slider-active';
         
-        add_settings_section( $settings_section, __('Elastic Slider Settings'), 'elastic_slider_options_page', 'elastic_slider_options_page' );
-        add_settings_field( $var_activate, __('Slider active'), 'elastic_slider_activate', 'elastic_slider_options_page_activate', $settings_section );
+        if(WP_DEBUG) echo 'Section name: '.$settings_section.PHP_EOL;
+        if(WP_DEBUG) echo 'Active var: '.$var_activate.PHP_EOL;
+        
+        add_settings_section( 
+                $settings_section, 
+                __('Elastic Slider Settings'), 
+                'elastic_slider_options_page_head', 
+                'elastic-slider-plugin-page' );
+        
+        add_settings_field( $id, $title, $callback, $page, $section, $args );
+        add_settings_field( 
+                $var_activate,                 
+                __('Slider active'), 
+                array('Elastic_Slide_Admin', 'elastic_slider_active'),
+                'elastic-slider-plugin-page', 
+                $settings_section,
+                array('label'=>__('Active?:'), 'label_for'=>'elastic_slider_active'));
+        
         register_setting( $settings_section, $var_activate);
-        */
-        
-        // Add the section to reading settings so we can add our fields to it
-        add_settings_section(
-        $settings_section,
-        'Example settings section in reading',
-        'elastic_slider_activate',
-        'reading'
-        );
-
-        // Add the field with the names and function to use for our new settings, put it in our new section
-        add_settings_field(
-        $var_activate,
-        'Example setting Name',
-        'elastic_slider_options_page_activate',
-        'reading',
-        $settings_section
-        );
-
-        // Register our setting in the "reading" settings section
-        register_setting( 'reading', 'wporg_setting_name' );
-    
-
     }
     
-    public function elastic_slider_activate()
+    public static function elastic_slider_options_page_head()
     {
         echo 'Sekcja';
     }
     
-    public function  elastic_slider_options_page_activate() {
-        echo 'Opis ustawienia';
+    public static function  elastic_slider_active() {
+        echo '<label for="'.$label_for.'">'.$label.'</label>'; exit();
     }
     
-    public function elastic_slider_options_page() { ?>
+    public static function elastic_slider_options_page() { ?>
         <div class="wrap">
         <h2>My Plugin Options</h2>
-        <?php echo do_settings_sections( 'elastic-slider-options' ); ?>
+        <form method="post" action="options.php">
+            <?php settings_fields( 'elastic-slider-options' ); ?>
+            <?php do_settings_sections( 'elastic-slider-options' ); ?>
+            <?php do_settings_fields( 'elastic-slider-plugin-page', 'elastic-slider-options'); ?>
+            <?php submit_button(); ?>
+        </form>
     </div>
     <?php }
+    
+    
 
 }
