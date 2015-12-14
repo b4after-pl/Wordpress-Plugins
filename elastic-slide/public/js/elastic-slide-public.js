@@ -28,5 +28,28 @@
 	 * Although scripts in the WordPress core, Plugins and Themes may be
 	 * practising this, we should strive to set a better example in our own work.
 	 */
+        
+        $(function() {
+            
+            // definitions
+            var elasticSlider = $('.elastic-slider-body');
+            var elasticSliderPosition = elasticSlider.css('margin-left');
+            
+            function elasticInit(elasticSlider)
+            {
+                elasticSlider.css('margin-left', '-100%');
+            }
+            
+            // functions
+            function elasticIntro(elasticSlider, elasticSliderPosition) 
+            {
+                elasticSlider.animate({marginLeft: elasticSliderPosition}, 2500);
+                //console.log(elasticSliderPosition);
+            }
+            
+            // runs
+            elasticInit(elasticSlider);
+            elasticIntro(elasticSlider, elasticSliderPosition);
+        });
 
 })( jQuery );

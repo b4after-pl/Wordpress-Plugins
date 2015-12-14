@@ -1,0 +1,30 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 2015-12-14, 15:48:46
+    Author     : Halva
+*/
+$elastic: '';
+$elastic-body-height: 300px;
+$elastic-body-width: 30%;
+$elastic-body-margin: (100% - $elastic-body-width)/2;
+$elastic-body-color: #cccccc;
+
+div#elastic-slider-container {
+    position: fixed;
+    width: 100%;
+    top: 25%;
+    height: $elastic-body-height;
+        
+    .elastic-slider-body {
+        position: absolute;
+        top: 0;
+        height: $elastic-body-height;
+        width: $elastic-body-width;
+        margin: 0 $elastic-body-margin 0 $elastic-body-margin;
+        background-color: $elastic-body-color;
+    }
+}

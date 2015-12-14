@@ -99,5 +99,13 @@ class Elastic_Slide_Public {
 		wp_enqueue_script( $this->Elastic_Slide, plugin_dir_url( __FILE__ ) . 'js/elastic-slide-public.js', array( 'jquery' ), $this->version, false );
 
 	}
+        
+       //add_filter( 'wp_footer' , 'your_other_function' );
+       public function elastic_slider_html_insert() {
+          $html = '<div id="elastic-slider-container">'
+                  . '<div class="elastic-slider-body">Tak</div>'
+                  . '</div>';
+          echo $html;
+       }
 
 }

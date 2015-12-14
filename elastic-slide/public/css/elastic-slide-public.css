@@ -1,4 +1,2 @@
-/**
- * All of the CSS for your public-facing functionality should be
- * included in this file.
- */
+div#elastic-slider-container{position:fixed;width:100%;top:25%;height:300px}div#elastic-slider-container .elastic-slider-body{position:absolute;top:0;height:300px;width:30%;margin:0 35% 0 35%;background-color:#ccc}
+/*# sourceMappingURL=elastic-slide-public.css.map */
