@@ -15,5 +15,8 @@
 
 <!-- This file should primarily consist of HTML with a little bit of PHP. -->
 <div id="elastic-slider-container">
-<div class="elastic-slider-body">Nie</div>
+<div class="elastic-slider-body">
+    <span class="close-tag"></span>
+    <img src="http://pu.i.wp.pl/k,NDMzMDg2NDAsNjE1MDQ5,f,lew.jpg" />
+</div>
 </div>

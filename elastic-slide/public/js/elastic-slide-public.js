@@ -33,23 +33,24 @@
             
             // definitions
             var elasticSlider = $('.elastic-slider-body');
-            var elasticSliderPosition = elasticSlider.css('margin-left');
-            
-            function elasticInit(elasticSlider)
-            {
-                elasticSlider.css('margin-left', '-100%');
-            }
+            var closeTag = $('.elastic-slider-body span.close-tag');
             
             // functions
-            function elasticIntro(elasticSlider, elasticSliderPosition) 
+            function elasticIntro(elasticSlider) 
             {
-                elasticSlider.animate({marginLeft: elasticSliderPosition}, 2500);
-                //console.log(elasticSliderPosition);
+                elasticSlider.addClass('elastic-slider-body-intro');
             }
             
+            function elasticOutro(elasticSlider)
+            {
+                elasticSlider.addClass('elastic-slider-body-outro');
+            }
             // runs
-            elasticInit(elasticSlider);
-            elasticIntro(elasticSlider, elasticSliderPosition);
+            elasticIntro(elasticSlider);
+            
+            closeTag.click(function() {
+                elasticOutro(elasticSlider);
+            });
         });
 
 })( jQuery );
