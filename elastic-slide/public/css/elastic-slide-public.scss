@@ -29,7 +29,20 @@ div#elastic-slider-container {
         width: $elastic-body-width;
         margin: 0 $elastic-body-margin 0 $elastic-body-margin-initial;
         background-color: $elastic-body-color;
+        animation-duration: 1s;
     }
+    
+    .elastic-slider-body-intro {
+        animation-name: elasticIntro;
+        animation-fill-mode: both;
+    }
+     
+    .elastic-slider-body-outro { 
+        animation-name: elasticOutro;
+        animation-fill-mode: both;
+    }
+    
+    @import 'elastic-slider-anim-horizontal';
     
     .elastic-slider-body img {
         max-width: 100%;
@@ -45,18 +58,4 @@ div#elastic-slider-container {
         top: 5px;
         right: 5px; 
     }
-     
-    .elastic-slider-body-intro {
-        animation-name: elasticIntro;
-        animation-duration: 1s;
-        animation-fill-mode: both;
-    }
-     
-    .elastic-slider-body-outro { 
-        animation-name: elasticOutro;
-        animation-duration: 1s;
-        animation-fill-mode: both;
-    }
-    
-    @import 'elastic-slider-anim-horizontal';
 }

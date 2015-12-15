@@ -49,9 +49,18 @@
             {
                 elasticSlider.addClass('elastic-slider-body-outro');
             }
+            
+            function elasticInit(elasticSlider)
+            {
+                elasticSlider.css('animationDuration', php_vars.elastic_slider_animation_duration+'s');
+//                console.log(php_vars.elastic_slider_animation_duration);
+//                console.log(elasticSlider.css('animationDuration'));
+            }
+            
             // runs
             // php_vars - data pased by wp_localize_script;
-            elasticIntro(elasticSlider, php_vars.start);
+            elasticInit(elasticSlider,php_vars.elastic_slider_animation_duration);
+            elasticIntro(elasticSlider, php_vars.elastic_slider_start_delay);
 //            
             closeTag.click(function() {
                 elasticOutro(elasticSlider);

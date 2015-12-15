@@ -30,28 +30,14 @@ div#elastic-slider-container .elastic-slider-body {
   width: 50%;
   margin: 0 25% 0 -100%;
   background-color: #cccccc;
-}
-div#elastic-slider-container .elastic-slider-body img {
-  max-width: 100%;
-}
-div#elastic-slider-container .close-tag {
-  display: block;
-  width: 20px;
-  height: 20px;
-  background-color: #000;
-  cursor: pointer;
-  position: absolute;
-  top: 5px;
-  right: 5px;
+  animation-duration: 1s;
 }
 div#elastic-slider-container .elastic-slider-body-intro {
   animation-name: elasticIntro;
-  animation-duration: 1s;
   animation-fill-mode: both;
 }
 div#elastic-slider-container .elastic-slider-body-outro {
   animation-name: elasticOutro;
-  animation-duration: 1s;
   animation-fill-mode: both;
 }
 @keyframes elasticIntro {
@@ -78,6 +64,19 @@ div#elastic-slider-container .elastic-slider-body-outro {
     margin-left: 125%;
     transform: skew(40deg);
   }
+}
+div#elastic-slider-container .elastic-slider-body img {
+  max-width: 100%;
+}
+div#elastic-slider-container .close-tag {
+  display: block;
+  width: 20px;
+  height: 20px;
+  background-color: #000;
+  cursor: pointer;
+  position: absolute;
+  top: 5px;
+  right: 5px;
 }
 
 /*# sourceMappingURL=elastic-slide-public.css.map */
