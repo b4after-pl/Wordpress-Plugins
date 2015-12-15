@@ -1,0 +1,21 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 2015-12-15, 15:01:21
+    Author     : Kamil Winiszewski (BEFORE AFTER agency) <agencja@b4after.pl>
+*/
+
+
+    @keyframes elasticIntro{
+        0%    { transform: skew(20deg); }
+        50%   { transform: skew(20deg); }
+        100%  { top: $elastic-body-top; transform: skew(0deg);  }
+    }
+     @keyframes elasticOutro{
+        0%    { top: elastic-body-top; transform: skew(0deg); }
+        50%   { transform: skew(40deg); }
+        100%  { top: $elastic-body-top+100%; transform: skew(40deg); }
+     }

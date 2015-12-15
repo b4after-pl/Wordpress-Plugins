@@ -22,92 +22,88 @@
  */
 class Elastic_Slide_Public {
 
-	/**
-	 * The ID of this plugin.
-	 *
-	 * @since    1.0.0
-	 * @access   private
-	 * @var      string    $Elastic_Slide    The ID of this plugin.
-	 */
-	private $Elastic_Slide;
+    /**
+     * The ID of this plugin.
+     *
+     * @since    1.0.0
+     * @access   private
+     * @var      string    $Elastic_Slide    The ID of this plugin.
+     */
+    private $Elastic_Slide;
 
-	/**
-	 * The version of this plugin.
-	 *
-	 * @since    1.0.0
-	 * @access   private
-	 * @var      string    $version    The current version of this plugin.
-	 */
-	private $version;
+    /**
+     * The version of this plugin.
+     *
+     * @since    1.0.0
+     * @access   private
+     * @var      string    $version    The current version of this plugin.
+     */
+    private $version;
 
-	/**
-	 * Initialize the class and set its properties.
-	 *
-	 * @since    1.0.0
-	 * @param      string    $Elastic_Slide       The name of the plugin.
-	 * @param      string    $version    The version of this plugin.
-	 */
-	public function __construct( $Elastic_Slide, $version ) {
+    /**
+     * Initialize the class and set its properties.
+     *
+     * @since    1.0.0
+     * @param      string    $Elastic_Slide       The name of the plugin.
+     * @param      string    $version    The version of this plugin.
+     */
+    public function __construct($Elastic_Slide = "Elastic_Slide_scripts", $version) {
 
-		$this->Elastic_Slide = $Elastic_Slide;
-		$this->version = $version;
+        $this->Elastic_Slide = $Elastic_Slide;
+        $this->version = $version;
+    }
 
-	}
+    /**
+     * Register the stylesheets for the public-facing side of the site.
+     *
+     * @since    1.0.0
+     */
+    public function enqueue_styles() {
 
-	/**
-	 * Register the stylesheets for the public-facing side of the site.
-	 *
-	 * @since    1.0.0
-	 */
-	public function enqueue_styles() {
+        /**
+         * This function is provided for demonstration purposes only.
+         *
+         * An instance of this class should be passed to the run() function
+         * defined in Elastic_Slide_Loader as all of the hooks are defined
+         * in that particular class.
+         *
+         * The Elastic_Slide_Loader will then create the relationship
+         * between the defined hooks and the functions defined in this
+         * class.
+         */
+        wp_enqueue_style($this->Elastic_Slide, plugin_dir_url(__FILE__) . 'css/elastic-slide-public.css', array(), $this->version, 'all');
+    }
 
-		/**
-		 * This function is provided for demonstration purposes only.
-		 *
-		 * An instance of this class should be passed to the run() function
-		 * defined in Elastic_Slide_Loader as all of the hooks are defined
-		 * in that particular class.
-		 *
-		 * The Elastic_Slide_Loader will then create the relationship
-		 * between the defined hooks and the functions defined in this
-		 * class.
-		 */
+    /**
+     * Register the JavaScript for the public-facing side of the site.
+     *
+     * @since    1.0.0
+     */
+    public function enqueue_scripts() {
 
-		wp_enqueue_style( $this->Elastic_Slide, plugin_dir_url( __FILE__ ) . 'css/elastic-slide-public.css', array(), $this->version, 'all' );
-
-	}
-
-	/**
-	 * Register the JavaScript for the public-facing side of the site.
-	 *
-	 * @since    1.0.0
-	 */
-	public function enqueue_scripts() {
-
-		/**
-		 * This function is provided for demonstration purposes only.
-		 *
-		 * An instance of this class should be passed to the run() function
-		 * defined in Elastic_Slide_Loader as all of the hooks are defined
-		 * in that particular class.
-		 *
-		 * The Elastic_Slide_Loader will then create the relationship
-		 * between the defined hooks and the functions defined in this
-		 * class.
-		 */
-
-		wp_enqueue_script( $this->Elastic_Slide, plugin_dir_url( __FILE__ ) . 'js/elastic-slide-public.js', array( 'jquery' ), $this->version, false );
-
-	}
+        /**
+         * This function is provided for demonstration purposes only.
+         *
+         * An instance of this class should be passed to the run() function
+         * defined in Elastic_Slide_Loader as all of the hooks are defined
+         * in that particular class.
+         *
+         * The Elastic_Slide_Loader will then create the relationship
+         * between the defined hooks and the functions defined in this
+         * class.
+         */
+        wp_enqueue_script($this->Elastic_Slide, plugin_dir_url(__FILE__) . 'js/elastic-slide-public.js', array('jquery'), $this->version, false);
         
-       //add_filter( 'wp_footer' , 'your_other_function' );
-       public function elastic_slider_html_insert() {
-//          $html = '<div id="elastic-slider-container">'
-//                  . '<div class="elastic-slider-body">Tak</div>'
-//                  . '</div>';
-           $template = locate_template('elastic-slide-public-display.php');
-           $html = Elastic_Slide_Loader::elastic_slider_get_template( 'elastic-slide-public-display' );
-          echo $html;
-       }
+        $dataToBePassed = array(
+            'start' => 5000,
+            'alertTo' => __('Please wait...', 'default')
+        );
+        wp_localize_script($this->Elastic_Slide, 'php_vars', $dataToBePassed);
+    }
+
+    //add_filter( 'wp_footer' , 'your_other_function' );
+    public function elastic_slider_html_insert() {
+        echo Elastic_Slide_Loader::elastic_slider_get_template('elastic-slide-public-display');
+    }
 
 }

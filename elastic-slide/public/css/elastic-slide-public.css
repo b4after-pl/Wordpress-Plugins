@@ -1,2 +1,83 @@
-div#elastic-slider-container{position:fixed;width:100%;top:25%;height:300px}div#elastic-slider-container .elastic-slider-body{position:absolute;top:0;height:300px;width:30%;margin:0 35% 0 -100%;background-color:#ccc;animation-duration:1s;animation-fill-mode:forwards}div#elastic-slider-container .elastic-slider-body img{max-width:100%}div#elastic-slider-container .close-tag{display:block;width:20px;height:20px;background-color:#000;cursor:pointer;position:absolute;top:5px;right:5px}div#elastic-slider-container .elastic-slider-body-intro{animation-name:elasticIntro;animation-duration:1s;animation-fill-mode:both}div#elastic-slider-container .elastic-slider-body-outro{animation-name:elasticOutro;animation-duration:1s;animation-fill-mode:both}@keyframes elasticIntro{0%{transform:skew(20deg)}50%{transform:skew(20deg)}100%{margin-left:35%;transform:skew(0deg)}}@keyframes elasticOutro{0%{margin-left:35%;transform:skew(0deg)}50%{transform:skew(40deg)}100%{margin-left:135%;transform:skew(40deg)}}
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 2015-12-14, 15:48:46
+    Author     : Halva
+*/
+div#elastic-slider-container {
+  position: fixed;
+  width: 100%;
+  top: 25%;
+  height: 300px;
+  z-index: 9999999;
+  /*
+  To change this license header, choose License Headers in Project Properties.
+  To change this template file, choose Tools | Templates
+  and open the template in the editor.
+  */
+  /* 
+      Created on : 2015-12-15, 14:52:55
+      Author     : Halva
+  */
+}
+div#elastic-slider-container .elastic-slider-body {
+  position: absolute;
+  top: 0;
+  height: 300px;
+  width: 50%;
+  margin: 0 25% 0 -100%;
+  background-color: #cccccc;
+}
+div#elastic-slider-container .elastic-slider-body img {
+  max-width: 100%;
+}
+div#elastic-slider-container .close-tag {
+  display: block;
+  width: 20px;
+  height: 20px;
+  background-color: #000;
+  cursor: pointer;
+  position: absolute;
+  top: 5px;
+  right: 5px;
+}
+div#elastic-slider-container .elastic-slider-body-intro {
+  animation-name: elasticIntro;
+  animation-duration: 1s;
+  animation-fill-mode: both;
+}
+div#elastic-slider-container .elastic-slider-body-outro {
+  animation-name: elasticOutro;
+  animation-duration: 1s;
+  animation-fill-mode: both;
+}
+@keyframes elasticIntro {
+  0% {
+    transform: skew(20deg);
+  }
+  50% {
+    transform: skew(20deg);
+  }
+  100% {
+    margin-left: 25%;
+    transform: skew(0deg);
+  }
+}
+@keyframes elasticOutro {
+  0% {
+    margin-left: 25%;
+    transform: skew(0deg);
+  }
+  50% {
+    transform: skew(40deg);
+  }
+  100% {
+    margin-left: 125%;
+    transform: skew(40deg);
+  }
+}
+
 /*# sourceMappingURL=elastic-slide-public.css.map */

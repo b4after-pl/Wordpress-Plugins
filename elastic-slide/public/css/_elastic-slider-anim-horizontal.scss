@@ -1,0 +1,20 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 2015-12-15, 14:52:55
+    Author     : Halva
+*/
+
+    @keyframes elasticIntro{
+        0%    { transform: skew(20deg); }
+        50%   { transform: skew(20deg); }
+        100%  { margin-left: $elastic-body-margin; transform: skew(0deg);  }
+    }
+     @keyframes elasticOutro{
+        0%    { margin-left: $elastic-body-margin; transform: skew(0deg); }
+        50%   { transform: skew(40deg); }
+        100%  { margin-left: $elastic-body-margin+100%; transform: skew(40deg);  }
+    }

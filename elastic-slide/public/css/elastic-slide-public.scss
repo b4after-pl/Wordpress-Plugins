@@ -9,16 +9,18 @@ and open the template in the editor.
 */
 $elastic: '';
 $elastic-body-height: 300px;
-$elastic-body-width: 30%;
+$elastic-body-width: 50%;
 $elastic-body-margin: (100% - $elastic-body-width)/2;
 $elastic-body-margin-initial: -100%;
 $elastic-body-color: #cccccc;
-
+$elastic-body-top: 30%;
+ 
 div#elastic-slider-container {
     position: fixed;
     width: 100%;
     top: 25%;
     height: $elastic-body-height;
+    z-index: 9999999;
         
     .elastic-slider-body {
         position: absolute;
@@ -27,8 +29,6 @@ div#elastic-slider-container {
         width: $elastic-body-width;
         margin: 0 $elastic-body-margin 0 $elastic-body-margin-initial;
         background-color: $elastic-body-color;
-        animation-duration: 1s;
-        animation-fill-mode: forwards;
     }
     
     .elastic-slider-body img {
@@ -43,29 +43,20 @@ div#elastic-slider-container {
         cursor: pointer;
         position: absolute;
         top: 5px;
-        right: 5px;
+        right: 5px; 
     }
-    
+     
     .elastic-slider-body-intro {
         animation-name: elasticIntro;
         animation-duration: 1s;
         animation-fill-mode: both;
     }
-    
-    .elastic-slider-body-outro {
+     
+    .elastic-slider-body-outro { 
         animation-name: elasticOutro;
         animation-duration: 1s;
         animation-fill-mode: both;
     }
     
-    @keyframes elasticIntro{
-        0%    { transform: skew(20deg); }
-        50%   { transform: skew(20deg); }
-        100%  { margin-left: $elastic-body-margin; transform: skew(0deg);  }
-    }
-     @keyframes elasticOutro{
-        0%    { margin-left: $elastic-body-margin; transform: skew(0deg); }
-        50%   { transform: skew(40deg); }
-        100%  { margin-left: $elastic-body-margin+100%; transform: skew(40deg);  }
-    }
+    @import 'elastic-slider-anim-horizontal';
 }

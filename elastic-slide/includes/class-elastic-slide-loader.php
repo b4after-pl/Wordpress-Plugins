@@ -188,8 +188,8 @@ class Elastic_Slide_Loader {
         }
 
         if (( true == $load ) && !empty($located))
-            load_template($located, $require_once);
-
+            return load_template($located, $require_once);
+        //echo '>>'.$located.'<<';
         return $located;
     }
     
