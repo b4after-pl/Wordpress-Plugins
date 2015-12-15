@@ -72,7 +72,7 @@ class Elastic_Slide {
 	public function __construct() {
 
                 
-                
+               
 		$this->Elastic_Slide = 'elastic-slide';
 		$this->version = '1.0.0';
 
@@ -93,6 +93,15 @@ class Elastic_Slide {
             return $fields;
         }
         
+        public static function get_settings()
+        {
+           $settings = array();
+           foreach(Elastic_Slide::elastic_slider_get_fields() as $field):
+            $settings[$field['name']] = esc_attr( get_option($field['name']) );
+           endforeach;
+           return $settings;
+            
+        }
 
 	/**
 	 * Load the required dependencies for this plugin.

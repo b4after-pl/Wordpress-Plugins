@@ -94,11 +94,8 @@ class Elastic_Slide_Public {
          */
         wp_enqueue_script($this->Elastic_Slide, plugin_dir_url(__FILE__) . 'js/elastic-slide-public.js', array('jquery'), $this->version, false);
         
-        $dataToBePassed = array(
-            'start' => 5000,
-            'alertTo' => __('Please wait...', 'default')
-        );
-        wp_localize_script($this->Elastic_Slide, 'php_vars', $dataToBePassed);
+        
+        wp_localize_script($this->Elastic_Slide, 'php_vars', Elastic_Slide::get_settings());
     }
 
     //add_filter( 'wp_footer' , 'your_other_function' );
