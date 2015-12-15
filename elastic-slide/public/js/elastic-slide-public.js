@@ -52,7 +52,7 @@
             // runs
             // php_vars - data pased by wp_localize_script;
             elasticIntro(elasticSlider, php_vars.start);
-            
+//            
             closeTag.click(function() {
                 elasticOutro(elasticSlider);
             });

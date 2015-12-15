@@ -39,6 +39,7 @@ class Elastic_Slide_Admin {
      * @var      string    $version    The current version of this plugin.
      */
     private $version;
+    
 
     /**
      * Initialize the class and set its properties.
@@ -125,16 +126,17 @@ class Elastic_Slide_Admin {
                 'elastic_slider_options_page_head', 
                 'elastic-slider-plugin-page' );
         
-        add_settings_field( $id, $title, $callback, $page, $section, $args );
-        add_settings_field( 
-                $var_activate,                 
-                __('Slider active'), 
-                array('Elastic_Slide_Admin', 'elastic_slider_active'),
-                'elastic-slider-plugin-page', 
-                $settings_section,
-                array('label'=>__('Active?:'), 'label_for'=>'elastic_slider_active'));
-        
-        register_setting( $settings_section, $var_activate);
+       // add_settings_field( $id, $title, $callback, $page, $section, $args );
+        foreach(Elastic_Slide::elastic_slider_get_fields() as $field):
+            add_settings_field( 
+                    $field['name'],                 
+                    __($field['label']), 
+                    array('Elastic_Slide_Admin', $field['name']),
+                    'elastic-slider-plugin-page', 
+                    $settings_section);
+
+            register_setting( $settings_section, $field['name']);
+        endforeach;
     }
     
     public static function elastic_slider_options_page_head()
@@ -142,8 +144,13 @@ class Elastic_Slide_Admin {
         echo 'Sekcja';
     }
     
-    public static function  elastic_slider_active() {
-        echo '<label for="'.$label_for.'">'.$label.'</label>'; exit();
+    private static function elastic_slider_display_fields() {
+        foreach(Elastic_Slide::elastic_slider_get_fields() as $field):
+            echo '<div>';
+            echo '<label for="'.$field['name'].'">'.$field['label'].'</label>'; 
+            echo '<input type="text" name="'.$field['name'].'" value="'.esc_attr( get_option($field['name']) ).'" />';
+            echo '</div>';
+        endforeach;
     }
     
     public static function elastic_slider_options_page() { ?>
@@ -151,8 +158,8 @@ class Elastic_Slide_Admin {
         <h2>My Plugin Options</h2>
         <form method="post" action="options.php">
             <?php settings_fields( 'elastic-slider-options' ); ?>
-            <?php do_settings_sections( 'elastic-slider-options' ); ?>
-            <?php do_settings_fields( 'elastic-slider-plugin-page', 'elastic-slider-options'); ?>
+            <?php Elastic_Slide_Admin::elastic_slider_display_fields(); ?>
+            
             <?php submit_button(); ?>
         </form>
     </div>

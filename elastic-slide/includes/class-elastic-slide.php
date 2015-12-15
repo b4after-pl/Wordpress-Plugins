@@ -56,6 +56,9 @@ class Elastic_Slide {
 	 * @var      string    $version    The current version of the plugin.
 	 */
 	protected $version;
+        
+        protected $fields;
+        
 
 	/**
 	 * Define the core functionality of the plugin.
@@ -68,6 +71,8 @@ class Elastic_Slide {
 	 */
 	public function __construct() {
 
+                
+                
 		$this->Elastic_Slide = 'elastic-slide';
 		$this->version = '1.0.0';
 
@@ -77,6 +82,17 @@ class Elastic_Slide {
 		$this->define_public_hooks();
 
 	}
+        
+        public static function elastic_slider_get_fields()
+        {
+             $fields = array(
+                    array('name'=>'elastic_slider_active', 'label'=>'Is active?'),
+                    array('name'=>'elastic_slider_start_delay', 'label'=>'Show popup after X seconds'),
+                    array('name'=>'elastic_slider_animation_duration', 'label'=>'Animation duration')
+                );
+            return $fields;
+        }
+        
 
 	/**
 	 * Load the required dependencies for this plugin.
