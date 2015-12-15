@@ -14,3 +14,6 @@
 ?>
 
 <!-- This file should primarily consist of HTML with a little bit of PHP. -->
+<div id="elastic-slider-container">
+<div class="elastic-slider-body">Nie</div>
+</div>

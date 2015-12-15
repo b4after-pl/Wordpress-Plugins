@@ -102,9 +102,11 @@ class Elastic_Slide_Public {
         
        //add_filter( 'wp_footer' , 'your_other_function' );
        public function elastic_slider_html_insert() {
-          $html = '<div id="elastic-slider-container">'
-                  . '<div class="elastic-slider-body">Tak</div>'
-                  . '</div>';
+//          $html = '<div id="elastic-slider-container">'
+//                  . '<div class="elastic-slider-body">Tak</div>'
+//                  . '</div>';
+           $template = locate_template('elastic-slide-public-display.php');
+           $html = Elastic_Slide_Loader::elastic_slider_get_template( 'elastic-slide-public-display' );
           echo $html;
        }
 
