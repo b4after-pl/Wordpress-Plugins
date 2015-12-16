@@ -188,14 +188,22 @@ class Elastic_Slide_Loader {
         }
 
         if (( true == $load ) && !empty($located))
-            return load_template($located, $require_once);
-        //echo '>>'.$located.'<<';
+            return Elastic_Slide_Loader::elastic_load_template($located, $require_once);
         return $located;
     }
     
     public static function elastic_slider_get_templates_dir() {
         $path = plugin_dir_path( __FILE__ );
         return $path.'../public/partials';
+    }
+    
+    public static function elastic_load_template($path, $require_once)
+    {
+        ob_start();
+        include $path;
+        $template = ob_get_contents();
+        ob_end_clean();
+        return $template;
     }
 
     /**

@@ -156,29 +156,46 @@ class Elastic_Slide_Admin {
     {
         if(!isset($field['type'])) $field['type'] = 'text';
         $tmp_field = false;
-        $tmp_field  = '<div>';
-        $tmp_field .= '<label for="'.$field['name'].'">'.$field['label'].'</label>'; 
+        
         
         if($field['type'] == 'text') {
-            $tmp_field .= '<input type="text" name="'.$field['name'].'" value="'.esc_attr( get_option($field['name']) ).'" />';
+            $tmp_field  = '<tr>'.PHP_EOL;
+            $tmp_field .= '<td><label for="'.$field['name'].'">'.$field['label'].'</label></td>'.PHP_EOL; 
+            $tmp_field .= '<td><input type="text" id="'.$field['name'].'" name="'.$field['name'].'" value="'.esc_attr( get_option($field['name']) ).'" /></td>'.PHP_EOL;
+            $tmp_field .= '</tr>'.PHP_EOL;
         } elseif($field['type'] == 'select') {
             
         } elseif($field['type'] == 'color') {
-            $tmp_field .= '<input type="text" name="'.$field['name'].'" value="'.esc_attr( get_option($field['name']) ).'" class="color-field" />';
+            $tmp_field  = '<tr>'.PHP_EOL;
+            $tmp_field .= '<td><label for="'.$field['name'].'">'.$field['label'].'</label></td>'.PHP_EOL; 
+            $tmp_field .= '<td><input type="text" id="'.$field['name'].'" name="'.$field['name'].'" value="'.esc_attr( get_option($field['name']) ).'" class="color-field" /></td>'.PHP_EOL;
+            $tmp_field .= '</tr>'.PHP_EOL;
         } elseif($field['type'] == 'checkbox') {
-            $tmp_field .= '<input type="checkbox" name="'.$field['name'].'" value="true" '.checked( esc_attr( get_option($field['name']) ), 'true', false ).' />';
+            $tmp_field  = '<tr>'.PHP_EOL;
+            $tmp_field .= '<td><label for="'.$field['name'].'">'.$field['label'].'</label></td>'.PHP_EOL; 
+            $tmp_field .= '<td><input type="checkbox" id="'.$field['name'].'" name="'.$field['name'].'" value="true" '.checked( esc_attr( get_option($field['name']) ), 'true', false ).' /></td>';
+            $tmp_field .= '</tr>'.PHP_EOL;
+        } elseif($field['type'] == 'editor') {
+            
+            echo '<tr>'.PHP_EOL;
+            echo '<td><label for="'.$field['name'].'">'.$field['label'].'</label></td>'.PHP_EOL; 
+            echo '<td>'.PHP_EOL;
+            wp_editor(stripslashes(esc_attr( get_option($field['name']) )), $field['name'], array('textarea_name' => $field['name']));
+            echo '</td>'.PHP_EOL;
+            echo '</tr>'.PHP_EOL;
         }
         
-        $tmp_field .= '</div>';
+        
         
         return $tmp_field;
     }
     
     private static function elastic_slider_display_fields() {
-        
+        echo '<table border="0" cellpadding="0" cellspacing="0">'.PHP_EOL;
         foreach(Elastic_Slide::elastic_slider_get_fields() as $field):
             echo Elastic_Slide_Admin::elastic_slider_get_field_template($field);
         endforeach;
+        echo '</table>'.PHP_EOL;
     }
     
     public static function elastic_slider_options_page() { ?>

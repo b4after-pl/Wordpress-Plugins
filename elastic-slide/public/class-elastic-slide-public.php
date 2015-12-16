@@ -100,7 +100,13 @@ class Elastic_Slide_Public {
 
     //add_filter( 'wp_footer' , 'your_other_function' );
     public function elastic_slider_html_insert() {
-        echo Elastic_Slide_Loader::elastic_slider_get_template('elastic-slide-public-display');
+        $content =  stripslashes( get_option('elastic_slider_content') );
+        echo do_shortcode( wpautop( $this->elastic_slider_insert_parse_content(Elastic_Slide_Loader::elastic_slider_get_template('elastic-slide-public-display'), $content) ) );
+    }
+    
+    public function elastic_slider_insert_parse_content($template, $content)
+    {
+        return str_replace('{{content}}', $content, $template);
     }
 
 }

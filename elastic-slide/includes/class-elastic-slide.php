@@ -89,7 +89,8 @@ class Elastic_Slide {
                     array('name'=>'elastic_slider_active', 'label'=>'Is active?', 'type'=>'checkbox'),
                     array('name'=>'elastic_slider_start_delay', 'label'=>'Show popup after X seconds'),
                     array('name'=>'elastic_slider_animation_duration', 'label'=>'Animation duration'),
-                    array('name'=>'elastic_slider_background_color', 'label'=>'Background color', 'type'=>'color')
+                    array('name'=>'elastic_slider_background_color', 'label'=>'Background color', 'type'=>'color'),
+                    array('name'=>'elastic_slider_content', 'label'=>'Popup content', 'type'=>'editor')
                 );
             return $fields;
         }
