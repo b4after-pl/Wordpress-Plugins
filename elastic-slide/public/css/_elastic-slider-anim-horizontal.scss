@@ -9,7 +9,7 @@ and open the template in the editor.
 */
 
     @keyframes elasticIntro{
-        0%    { transform: skew(20deg); }
+        0%    { margin-left: $elastic-body-margin-initial; transform: skew(20deg); }
         50%   { transform: skew(20deg); }
         100%  { margin-left: $elastic-body-margin; transform: skew(0deg);  }
     }

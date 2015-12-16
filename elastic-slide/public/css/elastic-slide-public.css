@@ -42,6 +42,7 @@ div#elastic-slider-container .elastic-slider-body-outro {
 }
 @keyframes elasticIntro {
   0% {
+    margin-left: -100%;
     transform: skew(20deg);
   }
   50% {

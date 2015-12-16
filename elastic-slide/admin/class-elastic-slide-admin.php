@@ -73,6 +73,9 @@ class Elastic_Slide_Admin {
          * class.
          */
         wp_enqueue_style($this->Elastic_Slide, plugin_dir_url(__FILE__) . 'css/elastic-slide-admin.css', array(), $this->version, 'all');
+        // Add the color picker css file       
+        wp_enqueue_style( 'wp-color-picker' ); 
+        
     }
 
     /**
@@ -94,6 +97,11 @@ class Elastic_Slide_Admin {
          * class.
          */
         wp_enqueue_script($this->Elastic_Slide, plugin_dir_url(__FILE__) . 'js/elastic-slide-admin.js', array('jquery'), $this->version, false);
+         
+        // Include our custom jQuery file with WordPress Color Picker dependency
+        wp_enqueue_script( 'elastic-slider-color-picker', plugins_url( 'js/elastic-slider-color-picker.js', __FILE__ ), array( 'wp-color-picker' ), false, true ); 
+    
+        
     }
 
     /**
@@ -144,12 +152,32 @@ class Elastic_Slide_Admin {
         echo 'Sekcja';
     }
     
+    private static function elastic_slider_get_field_template(Array $field)
+    {
+        if(!isset($field['type'])) $field['type'] = 'text';
+        $tmp_field = false;
+        $tmp_field  = '<div>';
+        $tmp_field .= '<label for="'.$field['name'].'">'.$field['label'].'</label>'; 
+        
+        if($field['type'] == 'text') {
+            $tmp_field .= '<input type="text" name="'.$field['name'].'" value="'.esc_attr( get_option($field['name']) ).'" />';
+        } elseif($field['type'] == 'select') {
+            
+        } elseif($field['type'] == 'color') {
+            $tmp_field .= '<input type="text" name="'.$field['name'].'" value="'.esc_attr( get_option($field['name']) ).'" class="color-field" />';
+        } elseif($field['type'] == 'checkbox') {
+            $tmp_field .= '<input type="checkbox" name="'.$field['name'].'" value="true" '.checked( esc_attr( get_option($field['name']) ), 'true', false ).' />';
+        }
+        
+        $tmp_field .= '</div>';
+        
+        return $tmp_field;
+    }
+    
     private static function elastic_slider_display_fields() {
+        
         foreach(Elastic_Slide::elastic_slider_get_fields() as $field):
-            echo '<div>';
-            echo '<label for="'.$field['name'].'">'.$field['label'].'</label>'; 
-            echo '<input type="text" name="'.$field['name'].'" value="'.esc_attr( get_option($field['name']) ).'" />';
-            echo '</div>';
+            echo Elastic_Slide_Admin::elastic_slider_get_field_template($field);
         endforeach;
     }
     
