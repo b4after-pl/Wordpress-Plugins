@@ -51,6 +51,7 @@ class Elastic_Slide_Public {
 
         $this->Elastic_Slide = $Elastic_Slide;
         $this->version = $version;
+        $this->Active_Marker = get_option('elastic_slider_active');
     }
 
     /**
@@ -71,7 +72,9 @@ class Elastic_Slide_Public {
          * between the defined hooks and the functions defined in this
          * class.
          */
-        wp_enqueue_style($this->Elastic_Slide, plugin_dir_url(__FILE__) . 'css/elastic-slide-public.css', array(), $this->version, 'all');
+        if ($this->Active_Marker) {
+            wp_enqueue_style($this->Elastic_Slide, plugin_dir_url(__FILE__) . 'css/elastic-slide-public.css', array(), $this->version, 'all');
+        }
     }
 
     /**
@@ -92,20 +95,21 @@ class Elastic_Slide_Public {
          * between the defined hooks and the functions defined in this
          * class.
          */
-        wp_enqueue_script($this->Elastic_Slide, plugin_dir_url(__FILE__) . 'js/elastic-slide-public.js', array('jquery'), $this->version, false);
-        
-        
-        wp_localize_script($this->Elastic_Slide, 'php_vars', Elastic_Slide::get_settings());
+        if ($this->Active_Marker) {
+            wp_enqueue_script($this->Elastic_Slide, plugin_dir_url(__FILE__) . 'js/elastic-slide-public.js', array('jquery'), $this->version, false);
+            wp_localize_script($this->Elastic_Slide, 'php_vars', Elastic_Slide::get_settings());
+        }
     }
 
     //add_filter( 'wp_footer' , 'your_other_function' );
     public function elastic_slider_html_insert() {
-        $content =  stripslashes( get_option('elastic_slider_content') );
-        echo do_shortcode( wpautop( $this->elastic_slider_insert_parse_content(Elastic_Slide_Loader::elastic_slider_get_template('elastic-slide-public-display'), $content) ) );
+        if ($this->Active_Marker) {
+            $content = stripslashes(get_option('elastic_slider_content'));
+            echo do_shortcode(wpautop($this->elastic_slider_insert_parse_content(Elastic_Slide_Loader::elastic_slider_get_template('elastic-slide-public-display'), $content)));
+        }
     }
-    
-    public function elastic_slider_insert_parse_content($template, $content)
-    {
+
+    public function elastic_slider_insert_parse_content($template, $content) {
         return str_replace('{{content}}', $content, $template);
     }
 

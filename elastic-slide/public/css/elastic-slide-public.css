@@ -31,6 +31,7 @@ div#elastic-slider-container .elastic-slider-body {
   margin: 0 25% 0 -100%;
   background-color: #cccccc;
   animation-duration: 1s;
+  padding: 0 20px 20px 20px;
 }
 div#elastic-slider-container .elastic-slider-body-intro {
   animation-name: elasticIntro;

@@ -53,6 +53,8 @@
             function elasticInit(elasticSlider)
             {
                 elasticSlider.css('animationDuration', php_vars.elastic_slider_animation_duration+'s');
+                elasticSlider.css('backgroundColor', php_vars.elastic_slider_background_color);
+                elasticSlider.css('color', php_vars.elastic_slider_font_color);
 //                console.log(php_vars.elastic_slider_animation_duration);
 //                console.log(elasticSlider.css('animationDuration'));
             }
