@@ -72,4 +72,4 @@ function run_Elastic_Slide() {
 	$plugin->run();
 
 }
-run_Elastic_Slide();
+add_action('plugins_loaded', 'run_Elastic_Slide');

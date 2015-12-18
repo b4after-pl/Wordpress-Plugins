@@ -51,9 +51,24 @@ class Elastic_Slide_Public {
 
         $this->Elastic_Slide = $Elastic_Slide;
         $this->version = $version;
-        $this->Active_Marker = get_option('elastic_slider_active');
+        $this->Active_Marker = $this->elastic_slider_active_check();
     }
-
+    
+    /**
+     * Check is plugin turned on for public or for admin (preview)
+     * 
+     * @since 1.0.0
+     */
+    private function elastic_slider_active_check()
+    {
+        $control = false;
+        if(get_option('elastic_slider_admin_active') && is_super_admin()) { 
+            $control = true;
+        } elseif(get_option('elastic_slider_active')) { 
+            $control = true;
+        }
+        return $control;
+    }
     /**
      * Register the stylesheets for the public-facing side of the site.
      *
