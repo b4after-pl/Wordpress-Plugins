@@ -96,11 +96,12 @@ class Elastic_Slide_Admin {
          * between the defined hooks and the functions defined in this
          * class.
          */
+        wp_enqueue_media();
         wp_enqueue_script($this->Elastic_Slide, plugin_dir_url(__FILE__) . 'js/elastic-slide-admin.js', array('jquery'), $this->version, false);
          
         // Include our custom jQuery file with WordPress Color Picker dependency
         wp_enqueue_script( 'elastic-slider-color-picker', plugins_url( 'js/elastic-slider-color-picker.js', __FILE__ ), array( 'wp-color-picker' ), false, true ); 
-    
+        
         
     }
 
@@ -160,58 +161,89 @@ class Elastic_Slide_Admin {
         
         if($field['type'] == 'text') {
             $tmp_field  = '<tr>'.PHP_EOL;
-            $tmp_field .= '<td><label for="'.$field['name'].'">'.$field['label'].'</label></td>'.PHP_EOL; 
-            $tmp_field .= '<td><input type="text" id="'.$field['name'].'" name="'.$field['name'].'" value="'.esc_attr( get_option($field['name']) ).'" /></td>'.PHP_EOL;
-            $tmp_field .= '</tr>'.PHP_EOL;
-        } elseif($field['type'] == 'select') {
+            $tmp_field .= '<th><label for="'.$field['name'].'">'.$field['label'].'</label></th>'.PHP_EOL; 
+            $tmp_field .= '<td><input type="text" id="'.$field['name'].'" name="'.$field['name'].'" value="'.esc_attr( get_option($field['name']) ).'" />'.PHP_EOL;
+            $tmp_field .=  '<br />'.__($field['help']).PHP_EOL;
+            $tmp_field .= '<td></tr>'.PHP_EOL;
+        } elseif($field['type'] === 'select') {
             $tmp_field  = '<tr>'.PHP_EOL;
-            $tmp_field .= '<td><label for="'.$field['name'].'">'.$field['label'].'</label></td>'.PHP_EOL; 
+            $tmp_field .= '<th><label for="'.$field['name'].'">'.$field['label'].'</label></th>'.PHP_EOL; 
             $tmp_field .= '<td><select name="'.$field['name'].'" id="'.$field['name'].'">'.PHP_EOL;
                 foreach($field['options'] as $option){
                     $selected = (get_option($field['name'])===$option['name'])?'selected':'';
                     $tmp_field .= '<option value="'.$option['name'].'" '.$selected.'> '.$option['title'].' </option>'.PHP_EOL;
                 }
             $tmp_field .= '</select>'.PHP_EOL;
-            $tmp_field .= '</tr>'.PHP_EOL;
-        } elseif($field['type'] == 'color') {
+            $tmp_field .=  '<br />'.__($field['help']).PHP_EOL;
+            $tmp_field .= '<td></tr>'.PHP_EOL;
+        } elseif($field['type'] === 'color') {
             $tmp_field  = '<tr>'.PHP_EOL;
-            $tmp_field .= '<td><label for="'.$field['name'].'">'.$field['label'].'</label></td>'.PHP_EOL; 
-            $tmp_field .= '<td><input type="text" id="'.$field['name'].'" name="'.$field['name'].'" value="'.esc_attr( get_option($field['name']) ).'" class="color-field" /></td>'.PHP_EOL;
-            $tmp_field .= '</tr>'.PHP_EOL;
-        } elseif($field['type'] == 'checkbox') {
+            $tmp_field .= '<th><label for="'.$field['name'].'">'.$field['label'].'</label></th>'.PHP_EOL; 
+            $tmp_field .= '<td><input type="text" id="'.$field['name'].'" name="'.$field['name'].'" value="'.esc_attr( get_option($field['name']) ).'" class="color-field" />'.PHP_EOL;
+            $tmp_field .=  '<br />'.__($field['help']).PHP_EOL;
+            $tmp_field .= '<td></tr>'.PHP_EOL;
+        } elseif($field['type'] === 'checkbox') {
             $tmp_field  = '<tr>'.PHP_EOL;
-            $tmp_field .= '<td><label for="'.$field['name'].'">'.$field['label'].'</label></td>'.PHP_EOL; 
-            $tmp_field .= '<td><input type="checkbox" id="'.$field['name'].'" name="'.$field['name'].'" value="true" '.checked( esc_attr( get_option($field['name']) ), 'true', false ).' /></td>';
-            $tmp_field .= '</tr>'.PHP_EOL;
-        } elseif($field['type'] == 'editor') {
-            
+            $tmp_field .= '<th><label for="'.$field['name'].'">'.$field['label'].'</label></th>'.PHP_EOL; 
+            $tmp_field .= '<td><input type="checkbox" id="'.$field['name'].'" name="'.$field['name'].'" value="true" '.checked( esc_attr( get_option($field['name']) ), 'true', false ).' />';
+            $tmp_field .=  '<br />'.__($field['help']).PHP_EOL;
+            $tmp_field .= '<td></tr>'.PHP_EOL;
+        } elseif($field['type'] === 'editor') {
             echo '<tr>'.PHP_EOL;
-            echo '<td><label for="'.$field['name'].'">'.$field['label'].'</label></td>'.PHP_EOL; 
+            echo '<th><label for="'.$field['name'].'">'.$field['label'].'</label><br />'.__($field['help']).'</th>'.PHP_EOL; 
             echo '<td>'.PHP_EOL;
             wp_editor(stripslashes(esc_attr( get_option($field['name']) )), $field['name'], array('textarea_name' => $field['name']));
             echo '</td>'.PHP_EOL;
             echo '</tr>'.PHP_EOL;
+        } elseif($field['type'] === 'upload') {
+            $tmp_field .=  '<tr>'.PHP_EOL;
+            $tmp_field .=  '<th><label for="upload_image">'.$field['label'].'</label></th>'.PHP_EOL;
+            $tmp_field .=  '<td><input id="'.$field['name'].'" type="text" size="36" name="'.$field['name'].'" value="'.get_option($field['name']).'" />'.PHP_EOL; 
+            $tmp_field .=  '<input data-inputid="'.$field['name'].'" class="upload_button button" type="button" value="'.__('Upload file').'" />'.PHP_EOL;
+            $tmp_field .=  '<br />'.__($field['help']).PHP_EOL;
+            $tmp_field .=  '</td>'.PHP_EOL;
+            $tmp_field .=  '</tr>'.PHP_EOL;
         }
         
         return $tmp_field;
     }
     
-    private static function elastic_slider_display_fields() {
-        echo '<table border="0" cellpadding="0" cellspacing="0">'.PHP_EOL;
+    private static function elastic_slider_display_fields($group) {
+        echo '<table class="form-table">'.PHP_EOL;
         foreach(Elastic_Slide::elastic_slider_get_fields() as $field):
-            echo Elastic_Slide_Admin::elastic_slider_get_field_template($field);
+            if($field['group']===$group){
+                echo Elastic_Slide_Admin::elastic_slider_get_field_template($field);
+            }
         endforeach;
         echo '</table>'.PHP_EOL;
     }
     
     public static function elastic_slider_options_page() { ?>
         <div class="wrap">
-        <h2>My Plugin Options</h2>
-        <form method="post" action="options.php">
-            <?php settings_fields( 'elastic-slider-options' ); ?>
-            <?php Elastic_Slide_Admin::elastic_slider_display_fields(); ?>
-            
-            <?php submit_button(); ?>
+        <?php $active_tab = isset( $_GET[ 'tab' ] ) ? $_GET[ 'tab' ] : 'settings';  ?> 
+            <h2 class="nav-tab-wrapper">
+	                <span class="nav-header">
+		                <?php echo __('Elastic Slide Settings');?>
+	                </span>
+	                &nbsp;
+	                <a href="#settings" data-tab="elastic_settings" class="nav-tab<?php echo ($active_tab==='settings')?' nav-tab-active':''?>"><?php echo __('Settings', 'elastic-slide'); ?></a>
+	                <a href="#content" data-tab="elastic_content" class="nav-tab<?php echo ($active_tab==='content')?' nav-tab-active':''?>"><?php echo __('Content', 'elastic-slide'); ?></a>
+	                <a href="#display" data-tab="elastic_display" class="nav-tab<?php echo ($active_tab==='display')?' nav-tab-active':''?>"><?php echo __('Display options', 'elastic-slide'); ?></a>
+	                
+	            </h2>
+        <form method="post" action="options.php" id="elastic_slide_form">
+        <?php settings_fields( 'elastic-slider-options' );
+            ?><div id="elastic_settings" class="tab_box tab_show"><?php
+            Elastic_Slide_Admin::elastic_slider_display_fields('settings');
+            ?></div><?php
+            ?><div id="elastic_content" class="tab_box"><?php
+                Elastic_Slide_Admin::elastic_slider_display_fields('content');
+            ?></div><?php
+            ?><div id="elastic_display" class="tab_box"><?php
+                Elastic_Slide_Admin::elastic_slider_display_fields('display');
+            ?></div><?php
+         submit_button(); 
+         ?>
         </form>
     </div>
     <?php }

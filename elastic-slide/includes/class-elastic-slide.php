@@ -86,19 +86,21 @@ class Elastic_Slide {
 
     public static function elastic_slider_get_fields() {
         $fields = array(
-            array('name' => 'elastic_slider_active', 'label' => 'Is active?', 'type' => 'checkbox'),
-            array('name' => 'elastic_slider_admin_active', 'label' => 'Show preview for admin?', 'type' => 'checkbox'),
-            array('name' => 'elastic_slider_start_delay', 'label' => 'Show popup after X seconds'),
-            array('name' => 'elastic_slider_animation_duration', 'label' => 'Animation duration'),
-            array('name' => 'elastic_slider_background_type', 'label' => 'Text color', 'type' => 'select', 'options'=>array(
+            array('group'=>'settings', 'name' => 'elastic_slider_active', 'label' => 'Is active?', 'help'=>'Show popup for everyone?', 'type' => 'checkbox'),
+            array('group'=>'settings', 'name' => 'elastic_slider_admin_active', 'label' => 'Show preview for admin?','help'=>'Show popup only for logged admins?', 'type' => 'checkbox'),
+            array('group'=>'settings', 'name' => 'elastic_slider_start_delay', 'label' => 'Show popup after X seconds', 'help'=>'Set time interval to shop popup in seconds.'),
+            array('group'=>'display', 'name' => 'elastic_slider_animation_duration', 'label' => 'Animation duration', 'help'=>'Set animation / transition effect lenght in seconds'),
+            array('group'=>'display', 'name' => 'elastic_slider_background_type', 'label' => 'Background type', 'help'=>'Choose type of background from list.', 'type' => 'select', 'options'=>array(
                 array('name'=>'gradient', 'title'=>__('Gradient')),
-                array('name'=>'solid', 'title'=>__('Solid color'))
+                array('name'=>'solid', 'title'=>__('Solid color')),
+                array('name'=>'image', 'title'=>__('Image'))
             )),
-        array('name' => 'elastic_slider_background_color_start', 'label' => 'First background color', 'type' => 'color'),
-            array('name' => 'elastic_slider_background_color_end', 'label' => 'Second background color', 'type' => 'color'),
-            array('name' => 'elastic_slider_font_color', 'label' => 'Text color', 'type' => 'color'),
-            array('name' => 'elastic_slider_border_radius', 'label' => 'Border radius', 'type' => 'text'),
-            array('name' => 'elastic_slider_content', 'label' => 'Popup content', 'type' => 'editor')
+            array('group'=>'display','name' => 'elastic_slider_background_image', 'label' => 'Image background', 'help'=>'Paste image url or upload it to server.', 'type' => 'upload'),
+            array('group'=>'display','name' => 'elastic_slider_background_color_start', 'label' => 'First background color','help'=>'Top gradient color.', 'type' => 'color'),
+            array('group'=>'display','name' => 'elastic_slider_background_color_end', 'label' => 'Second background color','help'=>'Bottom gradient color.', 'type' => 'color'),
+            array('group'=>'display','name' => 'elastic_slider_font_color', 'label' => 'Text color', 'help'=>'Main text font color.',  'type' => 'color'),
+            array('group'=>'display','name' => 'elastic_slider_border_radius', 'label' => 'Border radius', 'help'=>'0 to rectangular corners, 1+ for rounded corners.', 'type' => 'text'),
+            array('group'=>'content','name' => 'elastic_slider_content', 'label' => 'Popup content', 'help'=>'Fill popup content. You can use shortcodes like Contact Form 7 or any other.', 'type' => 'editor')
         );
         return $fields;
     }
