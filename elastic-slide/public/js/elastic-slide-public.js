@@ -57,13 +57,6 @@
                 elasticSlider.css('color', php_vars.elastic_slider_font_color);
                 if(php_vars.elastic_slider_background_type=='gradient')
                 {
-                    var gradient = '\n\
-    background: '+php_vars.elastic_slider_background_color_start+';\n\
-    background: -webkit-linear-gradient('+php_vars.elastic_slider_background_color_start+', '+php_vars.elastic_slider_background_color_end+'); \n\
-    background: -o-linear-gradient('+php_vars.elastic_slider_background_color_start+', '+php_vars.elastic_slider_background_color_end+'); \n\
-    background: -moz-linear-gradient('+php_vars.elastic_slider_background_color_start+', '+php_vars.elastic_slider_background_color_end+'); \n\
-    background: linear-gradient('+php_vars.elastic_slider_background_color_start+', '+php_vars.elastic_slider_background_color_end+'); \n\
-';
                     elasticSlider.css('background', php_vars.elastic_slider_background_color_start);
                     elasticSlider.css('background', '-webkit-linear-gradient('+php_vars.elastic_slider_background_color_start+', '+php_vars.elastic_slider_background_color_end+')');
                     elasticSlider.css('background', '-o-linear-gradient('+php_vars.elastic_slider_background_color_start+', '+php_vars.elastic_slider_background_color_end+')');
@@ -72,13 +65,11 @@
                     
                 }
                 elasticSlider.css('border-radius', php_vars.elastic_slider_border_radius);
-//                console.log(php_vars.elastic_slider_animation_duration);
-//                console.log(elasticSlider.css('animationDuration'));
             }
             
             // runs
             // php_vars - data pased by wp_localize_script;
-            elasticInit(elasticSlider,php_vars.elastic_slider_animation_duration);
+            elasticInit(elasticSlider);
             elasticIntro(elasticSlider, php_vars.elastic_slider_start_delay);
 //            
             closeTag.click(function() {
