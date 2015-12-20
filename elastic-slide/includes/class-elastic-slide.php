@@ -90,8 +90,14 @@ class Elastic_Slide {
             array('name' => 'elastic_slider_admin_active', 'label' => 'Show preview for admin?', 'type' => 'checkbox'),
             array('name' => 'elastic_slider_start_delay', 'label' => 'Show popup after X seconds'),
             array('name' => 'elastic_slider_animation_duration', 'label' => 'Animation duration'),
-            array('name' => 'elastic_slider_background_color', 'label' => 'Background color', 'type' => 'color'),
+            array('name' => 'elastic_slider_background_type', 'label' => 'Text color', 'type' => 'select', 'options'=>array(
+                array('name'=>'gradient', 'title'=>__('Gradient')),
+                array('name'=>'solid', 'title'=>__('Solid color'))
+            )),
+        array('name' => 'elastic_slider_background_color_start', 'label' => 'First background color', 'type' => 'color'),
+            array('name' => 'elastic_slider_background_color_end', 'label' => 'Second background color', 'type' => 'color'),
             array('name' => 'elastic_slider_font_color', 'label' => 'Text color', 'type' => 'color'),
+            array('name' => 'elastic_slider_border_radius', 'label' => 'Border radius', 'type' => 'text'),
             array('name' => 'elastic_slider_content', 'label' => 'Popup content', 'type' => 'editor')
         );
         return $fields;

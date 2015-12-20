@@ -164,7 +164,15 @@ class Elastic_Slide_Admin {
             $tmp_field .= '<td><input type="text" id="'.$field['name'].'" name="'.$field['name'].'" value="'.esc_attr( get_option($field['name']) ).'" /></td>'.PHP_EOL;
             $tmp_field .= '</tr>'.PHP_EOL;
         } elseif($field['type'] == 'select') {
-            
+            $tmp_field  = '<tr>'.PHP_EOL;
+            $tmp_field .= '<td><label for="'.$field['name'].'">'.$field['label'].'</label></td>'.PHP_EOL; 
+            $tmp_field .= '<td><select name="'.$field['name'].'" id="'.$field['name'].'">'.PHP_EOL;
+                foreach($field['options'] as $option){
+                    $selected = (get_option($field['name'])===$option['name'])?'selected':'';
+                    $tmp_field .= '<option value="'.$option['name'].'" '.$selected.'> '.$option['title'].' </option>'.PHP_EOL;
+                }
+            $tmp_field .= '</select>'.PHP_EOL;
+            $tmp_field .= '</tr>'.PHP_EOL;
         } elseif($field['type'] == 'color') {
             $tmp_field  = '<tr>'.PHP_EOL;
             $tmp_field .= '<td><label for="'.$field['name'].'">'.$field['label'].'</label></td>'.PHP_EOL; 
@@ -184,8 +192,6 @@ class Elastic_Slide_Admin {
             echo '</td>'.PHP_EOL;
             echo '</tr>'.PHP_EOL;
         }
-        
-        
         
         return $tmp_field;
     }
