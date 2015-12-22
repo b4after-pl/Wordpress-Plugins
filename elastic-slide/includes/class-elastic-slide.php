@@ -88,8 +88,16 @@ class Elastic_Slide {
         $fields = array(
             array('group'=>'settings', 'name' => 'elastic_slider_active', 'label' => 'Is active?', 'help'=>'Show popup for everyone?', 'type' => 'checkbox'),
             array('group'=>'settings', 'name' => 'elastic_slider_admin_active', 'label' => 'Show preview for admin?','help'=>'Show popup only for logged admins?', 'type' => 'checkbox'),
-            array('group'=>'settings', 'name' => 'elastic_slider_start_delay', 'label' => 'Show popup after X seconds', 'help'=>'Set time interval to shop popup in seconds.'),
-            array('group'=>'display', 'name' => 'elastic_slider_animation_duration', 'label' => 'Animation duration', 'help'=>'Set animation / transition effect lenght in seconds'),
+            array('group'=>'settings', 'name' => 'elastic_slider_start_delay', 'label' => 'Show popup after X seconds', 'help'=>'Set time interval to shop popup in seconds.', 'html_type'=>'number'),
+            array('group'=>'settings', 'name' => 'elastic_slider_cookie', 'label' => 'Save cookie when visitor close popup?', 'help'=>'This option prevent from display popup when visitor close popup and go to another page on Your website.', 'type' => 'checkbox'),
+            array('group'=>'settings', 'name' => 'elastic_slider_cookie_period', 'label' => 'Store cookie for X minutes', 'help'=>'1 hour = 60, 1 day = 1440, 1 week = 10080.', 'html_type'=>'number'),
+            array('group'=>'settings', 'name' => 'elastic_slider_display_rules', 'label' => 'Display rules', 'help'=>'Choose page type (one or many) to display popup.', 'type' => 'checkbox', 'multiple'=>true, 'options'=>array(
+                array('name'=>'frontpage', 'title'=>__('Frontpage / homepage', 'elastic_slider')),
+                array('name'=>'post_single', 'title'=>__('Single post', 'elastic_slider')),
+                array('name'=>'post_archive', 'title'=>__('Post archive', 'elastic_slider')),
+                array('name'=>'page', 'title'=>__('Single page', 'elastic_slider'))
+            )),
+            array('group'=>'display', 'name' => 'elastic_slider_animation_duration', 'label' => 'Animation duration', 'help'=>'Set animation / transition effect lenght in seconds', 'html_type'=>'number'),
             array('group'=>'display', 'name' => 'elastic_slider_background_type', 'label' => 'Background type', 'help'=>'Choose type of background from list.', 'type' => 'select', 'options'=>array(
                 array('name'=>'gradient', 'title'=>__('Gradient')),
                 array('name'=>'solid', 'title'=>__('Solid color')),

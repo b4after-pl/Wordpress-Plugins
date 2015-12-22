@@ -65,9 +65,15 @@ class Elastic_Slide_Public {
         if(get_option('elastic_slider_admin_active') && is_super_admin()) { 
             $control = true;
         } elseif(get_option('elastic_slider_active')) { 
-            $control = true;
+            if(!$this->elastic_slider_cookie_check()) { $control = true; }
         }
         return $control;
+    }
+    
+    private function elastic_slider_cookie_check()
+    {
+        if(isset($_COOKIE['elastic_slider_cookie'])) { return true; }
+        return false;
     }
     /**
      * Register the stylesheets for the public-facing side of the site.

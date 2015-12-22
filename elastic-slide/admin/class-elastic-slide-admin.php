@@ -156,19 +156,23 @@ class Elastic_Slide_Admin {
     private static function elastic_slider_get_field_template(Array $field)
     {
         if(!isset($field['type'])) $field['type'] = 'text';
+        if(!isset($field['html_type'])) $field['html_type'] = 'text';
+        if(!isset($field['multiple'])) $field['multiple'] = false;
         $tmp_field = false;
         
         
         if($field['type'] == 'text') {
             $tmp_field  = '<tr>'.PHP_EOL;
             $tmp_field .= '<th><label for="'.$field['name'].'">'.$field['label'].'</label></th>'.PHP_EOL; 
-            $tmp_field .= '<td><input type="text" id="'.$field['name'].'" name="'.$field['name'].'" value="'.esc_attr( get_option($field['name']) ).'" />'.PHP_EOL;
+            $tmp_field .= '<td><input type="'.$field['html_type'].'" id="'.$field['name'].'" name="'.$field['name'].'" value="'.esc_attr( get_option($field['name']) ).'" />'.PHP_EOL;
             $tmp_field .=  '<br />'.__($field['help']).PHP_EOL;
             $tmp_field .= '<td></tr>'.PHP_EOL;
         } elseif($field['type'] === 'select') {
+            $multiple = ($field['multiple'])?'multiple':'';
+            echo get_option($field['name']);
             $tmp_field  = '<tr>'.PHP_EOL;
             $tmp_field .= '<th><label for="'.$field['name'].'">'.$field['label'].'</label></th>'.PHP_EOL; 
-            $tmp_field .= '<td><select name="'.$field['name'].'" id="'.$field['name'].'">'.PHP_EOL;
+            $tmp_field .= '<td><select name="'.$field['name'].'" id="'.$field['name'].'" '.$multiple.'>'.PHP_EOL;
                 foreach($field['options'] as $option){
                     $selected = (get_option($field['name'])===$option['name'])?'selected':'';
                     $tmp_field .= '<option value="'.$option['name'].'" '.$selected.'> '.$option['title'].' </option>'.PHP_EOL;
@@ -184,10 +188,22 @@ class Elastic_Slide_Admin {
             $tmp_field .= '<td></tr>'.PHP_EOL;
         } elseif($field['type'] === 'checkbox') {
             $tmp_field  = '<tr>'.PHP_EOL;
-            $tmp_field .= '<th><label for="'.$field['name'].'">'.$field['label'].'</label></th>'.PHP_EOL; 
-            $tmp_field .= '<td><input type="checkbox" id="'.$field['name'].'" name="'.$field['name'].'" value="true" '.checked( esc_attr( get_option($field['name']) ), 'true', false ).' />';
-            $tmp_field .=  '<br />'.__($field['help']).PHP_EOL;
-            $tmp_field .= '<td></tr>'.PHP_EOL;
+            if(!$field['multiple']) {
+                $tmp_field .= '<th><label for="'.$field['name'].'">'.$field['label'].'</label></th>'.PHP_EOL; 
+                $tmp_field .= '<td><input type="checkbox" id="'.$field['name'].'" name="'.$field['name'].'" value="true" '.checked( esc_attr( get_option($field['name']) ), 'true', false ).' />';
+                $tmp_field .=  '<br />'.__($field['help']).PHP_EOL;
+                $tmp_field .= '<td></tr>'.PHP_EOL;
+            } else {
+                $tmp_field .= '<th>'.$field['label'].'</th>'.PHP_EOL; 
+                $tmp_field .= '<td>'.PHP_EOL; 
+                $opt_values = get_option($field['name']);
+                foreach($field['options'] as $option) {
+                     $tmp_field .= '<input type="checkbox" id="'.$field['name'].'_'.$option['name'].'" name="'.$field['name'].'['.$option['name'].']" value="true" '.checked( isset($opt_values[$option['name']]), true, false ).' /><label for="'.$field['name'].'_'.$option['name'].'">'.$option['title'].'</label><br />';
+                }
+                $tmp_field .=  '<br />'.__($field['help']).PHP_EOL;
+                $tmp_field .= '<td></tr>'.PHP_EOL;
+            }
+                
         } elseif($field['type'] === 'editor') {
             echo '<tr>'.PHP_EOL;
             echo '<th><label for="'.$field['name'].'">'.$field['label'].'</label><br />'.__($field['help']).'</th>'.PHP_EOL; 
@@ -231,6 +247,7 @@ class Elastic_Slide_Admin {
 	                <a href="#display" data-tab="elastic_display" class="nav-tab<?php echo ($active_tab==='display')?' nav-tab-active':''?>"><?php echo __('Display options', 'elastic-slide'); ?></a>
 	                
 	            </h2>
+        
         <form method="post" action="options.php" id="elastic_slide_form">
         <?php settings_fields( 'elastic-slider-options' );
             ?><div id="elastic_settings" class="tab_box tab_show"><?php

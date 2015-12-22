@@ -67,6 +67,12 @@
                 elasticSlider.css('border-radius', php_vars.elastic_slider_border_radius);
             }
             
+            function setCookie(cname, cvalue, exdays) {
+                var d = new Date();
+                d.setTime(d.getTime() + (exdays*60*1000));
+                var expires = "expires="+d.toUTCString();
+                document.cookie = cname + "=" + cvalue + "; " + expires;
+            }
             // runs
             // php_vars - data pased by wp_localize_script;
             elasticInit(elasticSlider);
@@ -74,6 +80,8 @@
 //            
             closeTag.click(function() {
                 elasticOutro(elasticSlider);
+                var cookiePeriod = php_vars.elastic_slider_cookie_period;
+                setCookie('elastic_slider_cookie', 'true', cookiePeriod);
             });
         });
 
