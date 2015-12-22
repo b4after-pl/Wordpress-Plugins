@@ -95,7 +95,13 @@ class Elastic_Slide {
                 array('name'=>'frontpage', 'title'=>__('Frontpage / homepage', 'elastic_slider')),
                 array('name'=>'post_single', 'title'=>__('Single post', 'elastic_slider')),
                 array('name'=>'post_archive', 'title'=>__('Post archive', 'elastic_slider')),
-                array('name'=>'page', 'title'=>__('Single page', 'elastic_slider'))
+                array('name'=>'category', 'title'=>__('Category index')),
+                array('name'=>'search', 'title'=>__('Search list')),
+                array('name'=>'page', 'title'=>__('Single page', 'elastic_slider')),
+                array('name'=>'tag', 'title'=>__('Tag archive')),
+                array('name'=>'author', 'title'=>__('Autor page')),
+                array('name'=>'404', 'title'=>__('404 page'))
+                
             )),
             array('group'=>'display', 'name' => 'elastic_slider_animation_duration', 'label' => 'Animation duration', 'help'=>'Set animation / transition effect lenght in seconds', 'html_type'=>'number'),
             array('group'=>'display', 'name' => 'elastic_slider_background_type', 'label' => 'Background type', 'help'=>'Choose type of background from list.', 'type' => 'select', 'options'=>array(
@@ -208,7 +214,8 @@ class Elastic_Slide {
     private function define_public_hooks() {
 
         $plugin_public = new Elastic_Slide_Public($this->get_Elastic_Slide(), $this->get_version());
-
+        $this->loader->add_action('wp', $plugin_public, 'elastic_slider_check_current_screen');
+        
         $this->loader->add_action('wp_enqueue_scripts', $plugin_public, 'enqueue_styles');
         $this->loader->add_action('wp_enqueue_scripts', $plugin_public, 'enqueue_scripts');
         $this->loader->add_action('wp_footer', $plugin_public, 'elastic_slider_html_insert');

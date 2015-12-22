@@ -39,7 +39,7 @@ class Elastic_Slide_Public {
      * @var      string    $version    The current version of this plugin.
      */
     private $version;
-
+    private $screen_type;
     /**
      * Initialize the class and set its properties.
      *
@@ -62,6 +62,7 @@ class Elastic_Slide_Public {
     private function elastic_slider_active_check()
     {
         $control = false;
+        
         if(get_option('elastic_slider_admin_active') && is_super_admin()) { 
             $control = true;
         } elseif(get_option('elastic_slider_active')) { 
@@ -72,8 +73,27 @@ class Elastic_Slide_Public {
     
     private function elastic_slider_cookie_check()
     {
+       
         if(isset($_COOKIE['elastic_slider_cookie'])) { return true; }
         return false;
+    }
+    
+    public function elastic_slider_check_current_screen() {
+        if(is_page())       { $tmp = 'page_single'; }
+        if(is_front_page()) { $tmp = 'frontpage'; }
+        if(is_home())       { $tmp = 'frontpage'; }
+        if(is_single())     { $tmp = 'post_single'; }
+        if(is_category())   { $tmp = 'category'; }
+        if(is_search())     { $tmp = 'search'; }
+        if(is_tag())        { $tmp = 'tag'; }
+        if(is_author())     { $tmp = 'author'; }
+        if(is_404())        { $tmp = '404'; }
+        
+        $this->screen_type = $tmp;
+        
+        $allowe_pages = get_option('elastic_slider_display_rules');
+       
+        if(!isset($allowe_pages[$this->screen_type])) { $this->Active_Marker = false; }
     }
     /**
      * Register the stylesheets for the public-facing side of the site.
