@@ -78,6 +78,11 @@ class Elastic_Slide_Public {
         return false;
     }
     
+    /**
+     * Checks current display screen to validate is it allowed to display popup
+     *
+     * @since    1.0.0
+     */
     public function elastic_slider_check_current_screen() {
         if(is_page())       { $tmp = 'page_single'; }
         if(is_front_page()) { $tmp = 'frontpage'; }
